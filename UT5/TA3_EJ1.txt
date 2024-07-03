@@ -1,0 +1,86 @@
+public class Sandwich
+{
+public string Bread { get; set; }
+public string Cheese { get; set; }
+public string Meat { get; set; }
+public string Vegetables { get; set; }
+public string Condiments { get; set; }
+
+public override string ToString()
+{
+return $"Sandwich with {Bread} bread, {Cheese} cheese, {Meat} meat, {Vegetables} vegetables, and {Condiments} condiments.";
+}
+}
+
+public class SandwichBuilder
+{
+private Sandwich _sandwich = new Sandwich();
+
+public SandwichBuilder AddBread(string type)
+{
+this._sandwich.Bread = type;
+return this;
+}
+
+public SandwichBuilder AddCheese(string type)
+{
+this._sandwich.Cheese = type;
+return this;
+}
+
+public SandwichBuilder AddMeat(string type)
+{
+this._sandwich.Meat = type;
+return this;
+}
+
+public SandwichBuilder AddVegetables(string type)
+{
+this._sandwich.Vegetables = type;
+return this;
+}
+
+public SandwichBuilder AddCondiments(string type)
+{
+this._sandwich.Condiments = type;
+return this;
+}
+
+public void Reset()
+{
+this._sandwich = new Sandwich();
+}
+
+public Sandwich Build()
+{
+return this._sandwich;
+}
+}
+
+class Ej1
+{
+static void Main1(string[] args)
+{
+//Sandwich hamSandwichBuilder = new Sandwich("White", "Swiss", "Ham", "Lettuce, Tomato", "Mayo, Mustard");
+
+SandwichBuilder sandwichBuilder = new SandwichBuilder();
+sandwichBuilder.AddBread("White");
+sandwichBuilder.AddCheese("Swiss");
+sandwichBuilder.AddMeat("Ham");;
+sandwichBuilder.AddVegetables("Lettuce, Tomato");
+sandwichBuilder.AddCondiments("Mayo, Mustard");
+Sandwich hamSandwich = sandwichBuilder.Build();
+
+//Sandwich turkeySandwich = new Sandwich("Wheat", "Cheddar", "Turkey", null, "Mayo");
+        
+sandwichBuilder.Reset();
+sandwichBuilder.AddBread("Wheat");
+sandwichBuilder.AddCheese("Cheddar");
+sandwichBuilder.AddMeat("Turkey");
+sandwichBuilder.AddCondiments("Mayo");
+Sandwich turkeySandwich = sandwichBuilder.Build();
+
+Console.WriteLine(hamSandwich);
+Console.WriteLine(turkeySandwich);
+}
+}

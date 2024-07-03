@@ -1,0 +1,59 @@
+public class TravelPlan
+{
+    public string Flight { get; set; }
+    public string Hotel { get; set; }
+    public string CarRental { get; set; }
+    public string[] Activities { get; set; }
+    public string[] RestaurantReservations { get; set; }
+
+    public class Builder
+    {
+        private TravelPlan _travelPlan;
+
+        public Builder()
+        {
+            _travelPlan = new TravelPlan();
+        }
+
+        public Builder WithFlight(string flight)
+        {
+            _travelPlan.Flight = flight;
+            return this;
+        }
+
+        public Builder WithHotel(string hotel)
+        {
+            _travelPlan.Hotel = hotel;
+            return this;
+        }
+
+        public Builder WithCarRental(string carRental)
+        {
+            _travelPlan.CarRental = carRental;
+            return this;
+        }
+
+        public Builder WithActivities(string[] activities)
+        {
+            _travelPlan.Activities = activities;
+            return this;
+        }
+
+        public Builder WithRestaurantReservations(string[] restaurantReservations)
+        {
+            _travelPlan.RestaurantReservations = restaurantReservations;
+            return this;
+        }
+
+        public TravelPlan Build()
+        {
+            return _travelPlan;
+        }
+    }
+}
+
+TravelPlan plan = new TravelPlan.Builder()
+    .WithFlight("Flight1")
+    .WithHotel("Hotel1")
+    .WithActivities(new string[] {"Tour1", "Tour2"})
+    .Build();

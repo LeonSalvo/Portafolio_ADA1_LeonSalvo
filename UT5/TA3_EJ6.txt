@@ -1,0 +1,59 @@
+public interface IService
+{
+    void PerformTask();
+}
+public abstract class ServiceFactory
+{
+    public abstract IService CreateService();
+}
+
+public class SomeService : IService
+{
+    public void PerformTask()
+    {
+        // Implementación del método PerformTask para SomeService
+    }
+}
+
+public class OtherService : IService
+{
+    public void PerformTask()
+    {
+        // Implementación del método PerformTask para OtherService
+    }
+}
+public class SomeServiceFactory : ServiceFactory
+{
+    public override IService CreateService()
+    {
+        return new SomeService();
+    }
+}
+
+public class OtherServiceFactory : ServiceFactory
+{
+    public override IService CreateService()
+    {
+        return new OtherService();
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        // Crear una fábrica
+        ServiceFactory factory = new SomeServiceFactory();
+
+        // Crear un servicio
+        IService service = factory.CreateService();
+
+        // Realizar una tarea que requiere configuración
+        service.PerformTask();
+
+        // Otro ejemplo: acceder a la configuración desde otra parte de la aplicación
+        string apiEndpoint =
+            ConfigurationManager.Instance.GetConfiguration("apiEndpoint");
+        Console.WriteLine($"API Endpoint: {apiEndpoint}");
+    }
+}

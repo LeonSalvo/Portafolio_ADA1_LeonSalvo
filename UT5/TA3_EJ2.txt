@@ -1,0 +1,73 @@
+public abstract class GameUnit : ICloneable
+{
+    public int Health { get; set; }
+    public int Attack { get; set; }
+    public int Defense { get; set; }
+
+    public virtual void LoadResources()
+    {
+        Console.WriteLine("Loading resources...");
+    }
+
+    public object Clone()
+    {
+        return this.MemberwiseClone();
+    }
+}
+
+public class Archer : GameUnit
+{
+    public Archer()
+    {
+        LoadResources();
+        Health = 100;
+        Attack = 15;
+        Defense = 5;
+    }
+
+    public override object Clone()
+    {
+        return new Archer
+        {
+            Health = this.Health,
+            Attack = this.Attack,
+            Defense = this.Defense
+        };
+    }
+}
+
+public class Knight : GameUnit
+{
+    public Knight()
+    {
+        LoadResources();
+        Health = 200;
+        Attack = 20;
+        Defense = 10;
+    }
+
+    public override object Clone()
+    {
+        return new Knight
+        {
+            Health = this.Health,
+            Attack = this.Attack,
+            Defense = this.Defense
+        };
+    }
+}
+
+static void Main(string[] args)
+{
+    Console.WriteLine("Creating original Archer...");
+    Archer originalArcher = new Archer();
+    Console.WriteLine("Copying Archers using prototype...");
+    Archer copiedArcher1 = (Archer)originalArcher.Clone();
+    Archer copiedArcher2 = (Archer)originalArcher.Clone();
+
+    Console.WriteLine("Creating original Knight...");
+    Knight originalKnight = new Knight();
+    Console.WriteLine("Copying Knights using prototype...");
+    Knight copiedKnight1 = (Knight)originalKnight.Clone();
+    Knight copiedKnight2 = (Knight)originalKnight.Clone();
+}

@@ -1,0 +1,70 @@
+public class MessageServiceFactory
+{
+    public IMessageService CreateService(string serviceType)
+    {
+        if (serviceType == "SMS")
+        {
+            return new SmsService();
+        }
+        else if (serviceType == "Email")
+        {
+            return new EmailService();
+        }
+        else if (serviceType == "Facebook")
+        {
+            return new FacebookService();
+        }
+        else
+        {
+            throw new ArgumentException("Invalid service type", nameof(serviceType));
+        }
+    }
+}
+
+public interface IMessageService
+{
+    void SendMessage(string message);
+}
+
+public class SmsService : IMessageService
+{
+    public void SendMessage(string message)
+    {
+        Console.WriteLine($"Sending SMS message: {message}");
+        // Lógica para enviar SMS...
+    }
+}
+
+public class EmailService : IMessageService
+{
+    public void SendMessage(string message)
+    {
+        Console.WriteLine($"Sending Email: {message}");
+        // Lógica para enviar Email...
+    }
+}
+
+public class FacebookService : IMessageService
+{
+    public void SendMessage(string message)
+    {
+        Console.WriteLine($"Sending Facebook Message: {message}");
+        // Lógica para enviar mensaje de Facebook...
+    }
+}
+
+public class MessagingApp
+{
+    private MessageServiceFactory _factory;
+
+    public MessagingApp()
+    {
+        _factory = new MessageServiceFactory();
+    }
+
+    public void SendMessage(string serviceType, string message)
+    {
+        var service = _factory.CreateService(serviceType);
+        service.SendMessage(message);
+    }
+}
